@@ -9,18 +9,21 @@ const rl = readline.createInterface({
 
 
 function rockPaperScissors(hand1, hand2) {
-  if (hand1 === hand2) {
+  if (hand1 === 'rock' || hand1 === 'paper' || hand1 === 'scissors'){
+    if (hand1 === hand2) {
     return "It's a tie!";
-  } else if (hand1 === 'rock') {
+    } else if (hand1 === 'rock') {
     return hand1Rock(hand2);
-  } else if (hand1 === 'scissors') {
-    return hand1Scissors(hand2);
-  } else if (hand1 === 'paper') {
-    return hand1Paper(hand2);
-  } else {
-  return "Invalid input";
+    } else if (hand1 === 'scissors') {
+      return hand1Scissors(hand2);
+    } else if (hand1 === 'paper') {
+      return hand1Paper(hand2);
+    } 
+  }else {
+    return "Invalid input";
+    }
   }
-}
+
 function hand1Rock(hand) {
   if (hand === 'paper') {
     return 'Hand two wins!';
