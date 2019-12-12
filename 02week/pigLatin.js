@@ -9,15 +9,39 @@ const rl = readline.createInterface({
 
 
 function pigLatin(word) {
+  let a = word.indexOf('a');
+  let e = word.indexOf('e');
+  let i = word.indexOf('i');
+  let o = word.indexOf('o');
+  let u = word.indexOf('u');
+  let vowel = Math.min(a, e, i, o, u);
+  
+  if (a === 0){
+    let latin = word + 'yay';
+    return latin;
+  } else {
+    let latin = word.subString(1)+word.subString(0, 1)+'ay';
+    return latin;
+    
+  }
 
-  // Your code here
+  let first = word.charAt(0);
+
+  if (a && e && i && o && u === -1) {
+    return word+'ay';
+  }
+  console.log(a, e, i, o, u);
+  console.log(vowel);
+  console.log(first);
+
 
 }
 
 
 function getPrompt() {
   rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
+    let ans = answer.trim();
+    console.log( pigLatin(ans.toLowerCase()) );
     getPrompt();
   });
 }
