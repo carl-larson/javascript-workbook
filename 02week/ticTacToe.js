@@ -58,14 +58,14 @@ function checkForWin() {
     for (let b=0; b<=2; b++){
       if (board[a][b] != ' '){
         space++;
-        if(space === 9) {
-          console.log("It's a Draw!");
-          draw = true;
-          return;
-        }
+        
       }
     }
-  }
+  }if(space === 9) {
+          console.log("It's a Draw!");
+          draw = true;
+          // return;
+        }
 }
 
 function ticTacToe(row, column) {
