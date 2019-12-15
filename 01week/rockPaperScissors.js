@@ -9,15 +9,19 @@ const rl = readline.createInterface({
 
 
 function rockPaperScissors(hand1, hand2) {
-  if (hand1 === 'rock' || hand1 === 'paper' || hand1 === 'scissors'){
-    if (hand1 === hand2) {
-    return "It's a tie!";
-    } else if (hand1 === 'rock') {
-    return hand1Rock(hand2);
-    } else if (hand1 === 'scissors') {
-      return hand1Scissors(hand2);
-    } else if (hand1 === 'paper') {
-      return hand1Paper(hand2);
+let hd1 = hand1.trim();
+let hd2 = hand2.trim();
+let h1 = hd1.toLowerCase();
+let h2 = hd2.toLowerCase();
+  if (h1 === 'rock' || h1 === 'paper' || h1 === 'scissors'){
+    if (h1 === h2) {
+      return "It's a tie!";
+    } else if (h1 === 'rock') {
+      return hand1Rock(h2);
+    } else if (h1 === 'scissors') {
+      return hand1Scissors(h2);
+    } else if (h1 === 'paper') {
+      return hand1Paper(h2);
     } 
   }else {
     return "Invalid input";
@@ -54,11 +58,7 @@ function hand1Paper(hand) {
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
-      // answer1.trim();
-      // answer2.trim();
-      let a1 = answer1.toLowerCase();
-      let a2 = answer2.toLowerCase();
-      console.log( rockPaperScissors(a1.trim(), a2.trim()) );
+      console.log( rockPaperScissors(answer1, answer2));
       getPrompt();
     });
   });
