@@ -19,7 +19,7 @@ function pigLatin(word) {
     let word1 = fixed.substring(0, space);
     let word2 = fixed.substring(space+1);
     let latin1 = toLatin(word1);
-    let latin2 = toLatin(word2);
+    let latin2 = pigLatin(word2);
     return latin1 + ' ' + latin2;
   } else {
     let latin = toLatin(fixed);
