@@ -9,39 +9,62 @@ const rl = readline.createInterface({
 
 
 function pigLatin(word) {
+  let lower = word.toLowerCase();
+  let fixed = lower.trim();
+  let space = fixed.indexOf(' ');
+  
+  // let vowel = Math.min(a, e, i, o, u);
+  
+  if (space != -1){
+    let word1 = fixed.substring(0, space);
+    let word2 = fixed.substring(space+1);
+    let latin1 = toLatin(word1);
+    let latin2 = toLatin(word2);
+    return latin1 + ' ' + latin2;
+  } else {
+    let latin = toLatin(fixed);
+    return latin;
+  }
+  
+}
+
+function toLatin(word){
   let a = word.indexOf('a');
   let e = word.indexOf('e');
   let i = word.indexOf('i');
   let o = word.indexOf('o');
   let u = word.indexOf('u');
-  let vowel = Math.min(a, e, i, o, u);
-  
-  if (a === 0){
+  let firstCon = false;
+
+  if (a === 0 || e === 0 || i === 0 || o === 0 || u === 0){
     let latin = word + 'yay';
     return latin;
   } else {
-    let latin = word.subString(1)+word.subString(0, 1)+'ay';
+    firstCon = true;
+  }
+
+  if (firstCon === true) {
+    // let secondChar = word.charAt(1);
+    // if (secondChar != 'a' && secondChar != 'e' && secondChar != 'i' && secondChar != 'o' && secondChar != 'u'){
+    if (a != 1 && e != 1 && i != 1 && o != 1 && u != 1){  
+      let latin = word.substring(2)+word.substring(0, 2)+'ay';
+      return latin;
+    } else {
+    let latin = word.substring(1)+word.substring(0, 1)+'ay';
     return latin;
-    
+    }
   }
-
-  let first = word.charAt(0);
-
-  if (a && e && i && o && u === -1) {
-    return word+'ay';
-  }
-  console.log(a, e, i, o, u);
-  console.log(vowel);
-  console.log(first);
-
-
 }
 
+// function separateWords(word, space){
+//   let word1 = word.substring(0, space);
+//   let word2 = word.substring(space);
+//   return
+// }
 
 function getPrompt() {
   rl.question('word ', (answer) => {
-    let ans = answer.trim();
-    console.log( pigLatin(ans.toLowerCase()) );
+    console.log(pigLatin(answer) );
     getPrompt();
   });
 }
