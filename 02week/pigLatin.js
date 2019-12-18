@@ -1,11 +1,12 @@
 'use strict';
 
-const assert = require('assert');
-const readline = require('readline');
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+
+// const assert = require('assert');
+// const readline = require('readline');
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
 
 
 function pigLatin(word) {
@@ -34,24 +35,17 @@ function toLatin(word){
   let i = word.indexOf('i');
   let o = word.indexOf('o');
   let u = word.indexOf('u');
-  let firstCon = false;
-
-  if (a === 0 || e === 0 || i === 0 || o === 0 || u === 0){
-    let latin = word + 'yay';
+  // let firstCon = false;
+  // let consonant = 0;
+  if (a === 0 || e === 0 || i === 0 || o === 0 || u === 0) {
+    let latin = word+'yay';
     return latin;
-  } else {
-    firstCon = true;
-  }
-
-  if (firstCon === true) {
-    // let secondChar = word.charAt(1);
-    // if (secondChar != 'a' && secondChar != 'e' && secondChar != 'i' && secondChar != 'o' && secondChar != 'u'){
-    if (a != 1 && e != 1 && i != 1 && o != 1 && u != 1){  
-      let latin = word.substring(2)+word.substring(0, 2)+'ay';
-      return latin;
-    } else {
-    let latin = word.substring(1)+word.substring(0, 1)+'ay';
-    return latin;
+  }else {
+    for (let j = 1; j < word.length; j++) {
+      if (a === j || e === j || i === j || o === j || u === j){
+          let latin = word.substring(j)+word.substring(0, j)+'ay';
+          return latin;
+      }
     }
   }
 }
@@ -61,41 +55,53 @@ function toLatin(word){
 //   let word2 = word.substring(space);
 //   return
 // }
+// let button = document.getElementById("submit");
+// let sentence = document.getElementById("write").value;
+// let translation = document.getElementById("answer");
+// button.addEventListener("click", getSentence(sentence))
 
-function getPrompt() {
-  rl.question('word ', (answer) => {
-    console.log(pigLatin(answer) );
-    getPrompt();
-  });
+function getSentence() {
+  console.log("Click")
+  let sentence = document.getElementById("write").value;
+  let words = pigLatin(sentence);
+  let translation = document.getElementById("answer");
+  translation.value = words;
 }
+
+// function getPrompt() {
+//   rl.question('word ', (answer) => {
+//     console.log(pigLatin(answer) );
+//     getPrompt();
+//   });
+// }
 
 // Tests
 
-if (typeof describe === 'function') {
+// if (typeof describe === 'function') {
 
-  describe('#pigLatin()', () => {
-    it('should translate a simple word', () => {
-      assert.equal(pigLatin('car'), 'arcay');
-      assert.equal(pigLatin('dog'), 'ogday');
-    });
-    it('should translate a complex word', () => {
-      assert.equal(pigLatin('create'), 'eatecray');
-      assert.equal(pigLatin('valley'), 'alleyvay');
-    });
-    it('should attach "yay" if word begins with vowel', () => {
-      assert.equal(pigLatin('egg'), 'eggyay');
-      assert.equal(pigLatin('emission'), 'emissionyay');
-    });
-    it('should lowercase and trim word before translation', () => {
-      assert.equal(pigLatin('HeLlO '), 'ellohay');
-      assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-    });
-    it('Should separate two words and return them together', () => {
-      assert.equal(pigLatin('Hop Fest'), 'Ophay Estfay');
-    });
-  });
-} else {
+//   describe('#pigLatin()', () => {
+//     it('should translate a simple word', () => {
+//       assert.equal(pigLatin('car'), 'arcay');
+//       assert.equal(pigLatin('dog'), 'ogday');
+//     });
+//     it('should translate a complex word', () => {
+//       assert.equal(pigLatin('create'), 'eatecray');
+//       assert.equal(pigLatin('valley'), 'alleyvay');
+//     });
+//     it('should attach "yay" if word begins with vowel', () => {
+//       assert.equal(pigLatin('egg'), 'eggyay');
+//       assert.equal(pigLatin('emission'), 'emissionyay');
+//     });
+//     it('should lowercase and trim word before translation', () => {
+//       assert.equal(pigLatin('HeLlO '), 'ellohay');
+//       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
+//     });
+//     it('Should separate two words and return them together', () => {
+//       assert.equal(pigLatin('Hop Fest'), 'Ophay Estfay');
+//     });
+//   });
+// } else {
 
-  getPrompt();
+//   getPrompt();
 
-}
+// }

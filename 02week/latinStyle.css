@@ -1,0 +1,12 @@
+body {
+    background-color: lightskyblue;
+}
+div{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+div>* {
+    margin: 10px;
+
+}
