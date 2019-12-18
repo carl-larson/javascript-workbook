@@ -13,6 +13,7 @@ let board = [
 ];
 
 let playerTurn = 'X';
+let draw = false;
 
 function printBoard() {
   console.log('   0  1  2');
@@ -53,7 +54,7 @@ function checkForWin() {
     return true;
   }
   let space = 0;
-  let draw = false;
+  // let draw = false;
   for (let a=0; a<=2; a++){
     for (let b=0; b<=2; b++){
       if (board[a][b] != ' '){
