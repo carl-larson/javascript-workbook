@@ -27,6 +27,12 @@ function movePiece(startStack, endStack) {
 
 function isLegal(startStack, endStack) {
   // let firstLength = startStack.length - 1;
+  if (startStack != 'a' && startStack != 'b' && startStack != 'c') {
+    return false;
+  }
+  if (endStack != 'a' && endStack != 'b' && endStack != 'c') {
+    return false;
+  }
   let startLength = stacks[startStack].length - 1;
   let endLength = stacks[endStack].length-1;
   let start = stacks[startStack][startLength];
@@ -56,14 +62,15 @@ function checkForWin() {
   }
 
 }
-
+var moves = 0;
 function towersOfHanoi(startStack, endStack) {
   let legal = isLegal(startStack, endStack);
+  
   if (legal === true){
     movePiece(startStack, endStack);
-    
+    moves ++;
     if (checkForWin() === true){
-      console.log('You Win!')
+      console.log(`You Won in ${moves} moves!`);
       return true;
     } else{
       return;
