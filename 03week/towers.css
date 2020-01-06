@@ -40,3 +40,8 @@ body{
 
     width: 60%;
 }
+#green{
+    background-color: green;
+    background-image: linear-gradient(to bottom, green, darkgreen);
+
+    width: 45%;

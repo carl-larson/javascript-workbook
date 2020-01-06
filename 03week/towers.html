@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../styles/towers.css">
+    <link rel="stylesheet" href="./towers.css">
     <title>Towers of Hanoi</title>
 </head>
 <body>
@@ -15,13 +15,20 @@
                 <div data-ring="1" class="ring" id="red"></div>
                 <div data-ring="2" class="ring" id="orange"></div>
                 <div data-ring="3" class="ring" id="yellow"></div>
+                <div data-ring="4" class="ring" id="green"></div>
             </div>
             <div class="stack" id="stack2"></div>
             <div class="stack" id="stack3"></div>
             
         </div>
+        <div>Pick Up</div>
+        <input type="text" id="up"></input>
+        <div>Put Down</div>
+        <input type="text" id="down"></input>
+        <button id="input" onclick="getInput()">Move</button>
+        <div id="message">Make a move</div>
     </main>
 </body>
-<script type="text/javascript" src="../scripts/jquery.js"></script>
-<script type="text/javascript" src="../scripts/towers.js"></script>
+<!-- <script type="text/javascript" src="../scripts/jquery.js"></script> -->
+<script type="text/javascript" src="./towersGUI.js"></script>
 </html>

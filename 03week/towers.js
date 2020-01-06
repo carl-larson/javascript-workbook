@@ -14,6 +14,7 @@ $(function() {
             // $ring = $(this)
         }
     })
+    
 
 
 
