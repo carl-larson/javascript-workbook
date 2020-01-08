@@ -10,11 +10,15 @@ const rl = readline.createInterface({
 let board = [];
 let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+let numExact = 0;
+let numAlmost = 0;
+let turns = 0;
 
 function printBoard(arrGuess, numExact, numAlmost) {
+  let row = [arrGuess, numExact, numAlmost];
+  board.push(row);
   for (let i = 0; i < board.length; i++) {
-    let row = [arrGuess, numExact, numAlmost];
-    board.push(row);
+    
     console.log(board[i]);
   }
 }
@@ -34,18 +38,10 @@ function getRandomInt(min, max) {
 //   // your code here
 // }
 
-function exactMatch(arrGuess, arrSolution) {
-  let numExact = 0;
-  arrGuess.forEach((element, index) =>{
-    if (element === arrSolution[index]) {
-      numExact++;
-    }
-  });
-  return numExact;
-}
+
 
 function almostMatch(arrGuess, arrSolution) {
-  let numAlmost = 0;
+  numAlmost = 0;
   arrSolution.forEach((element, index) =>{
     for (let j = 0; j<arrGuess.length; j++){
       if (element === arrGuess[j]){
@@ -53,8 +49,30 @@ function almostMatch(arrGuess, arrSolution) {
         numAlmost++;
       }
     }
-  })
-  return numAlmost;
+  });
+  console.log('almost matches removed:');
+  console.log(arrSolution);
+  console.log(arrGuess);
+  console.log('exact '+numExact);
+  console.log('almost '+numAlmost);
+  printBoard(arrGuess, numExact, numAlmost);
+}
+
+function exactMatch(arrGuess, arrSolution) {
+  numExact = 0;
+  arrGuess.forEach((element, index) =>{
+    if (element === arrSolution[index]) {
+      numExact++;
+      arrGuess[index] = null;
+      arrSolution[index] = null;
+    }
+  });
+  console.log('exact matches removed:');
+  console.log(arrSolution);
+  console.log(arrGuess);
+  console.log('exact ' + numExact);
+  almostMatch(arrGuess, arrSolution);
+  // return numExact;
 }
 
 function mastermind(guess) {
@@ -62,13 +80,13 @@ function mastermind(guess) {
   // your code here
   // generateSolution();
   if (guess === solution){
-    return true;
+    return 'You guessed it!';
   } else {
-    let arrSolution = guess.split('');
+    let arrSolution = solution.split('');
     let arrGuess = guess.split('');
+    console.log(arrSolution);
+    console.log(arrGuess);
     exactMatch(arrGuess, arrSolution);
-    almostMatch(arrGuess, arrSolution);
-    printBoard(arrGuess, numExact, numAlmost);
   }
 }
 
@@ -81,8 +99,16 @@ function getPrompt() {
       console.log("You Won!");
       return;
     } else {
-      printBoard();
-      getPrompt();
+      turns++;
+      // printBoard();
+      if(turns < 10){
+        getPrompt();
+      } else {
+        console.log("The correct solution was:");
+        console.log(solution);
+        return;
+      }
+      
     }
   });
 }
