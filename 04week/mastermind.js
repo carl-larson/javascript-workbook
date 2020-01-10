@@ -10,12 +10,12 @@ const rl = readline.createInterface({
 let board = [];
 let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-let numExact = 0;
-let numAlmost = 0;
+// let numExact = 0;
+// let numAlmost = 0;
 let turns = 0;
 
-function printBoard(arrGuess, numExact, numAlmost) {
-  let row = [arrGuess, numExact, numAlmost];
+function printBoard(arrGuess, hint) {
+  let row = [arrGuess, hint];
   board.push(row);
   for (let i = 0; i < board.length; i++) {
     
@@ -34,51 +34,70 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// function generateHint() {
-//   // your code here
-// }
-
-
-
-function almostMatch(arrGuess, arrSolution) {
-  numAlmost = 0;
-  arrSolution.forEach((element, index) =>{
-    for (let j = 0; j<arrGuess.length; j++){
-      if (element === arrGuess[j]){
-        arrGuess[j] = null;
-        numAlmost++;
-      }
-    }
-  });
-  console.log('almost matches removed:');
-  console.log(arrSolution);
-  console.log(arrGuess);
-  console.log('exact '+numExact);
-  console.log('almost '+numAlmost);
-  printBoard(arrGuess, numExact, numAlmost);
-}
-
-function exactMatch(arrGuess, arrSolution) {
-  numExact = 0;
-  arrGuess.forEach((element, index) =>{
+function generateHint(arrGuess, arrSolution) {
+  let numExact = 0;
+  let numAlmost = 0;
+  let changeGuess = arrGuess;
+  changeGuess.forEach((element, index) =>{
     if (element === arrSolution[index]) {
       numExact++;
-      arrGuess[index] = null;
+      changeGuess[index] = null;
       arrSolution[index] = null;
     }
   });
   console.log('exact matches removed:');
   console.log(arrSolution);
-  console.log(arrGuess);
+  console.log(changeGuess);
   console.log('exact ' + numExact);
-  almostMatch(arrGuess, arrSolution);
-  // return numExact;
+  
+  arrSolution.forEach((element, index) =>{
+    for (let j = 0; j<arrGuess.length; j++){
+      if (element === changeGuess[j]){
+        changeGuess[j] = null;
+        numAlmost++;
+      }
+    }
+
+  });
+  console.log('almost matches removed:');
+  console.log(arrSolution);
+  console.log(changeGuess);
+  console.log('exact '+numExact);
+  console.log('almost '+numAlmost);
+  let hint = `${numExact}-${numAlmost}`;
+  console.log('Hint: '+hint);
+  printBoard(arrGuess, hint);
 }
+
+
+
+// function almostMatch(arrGuess, arrSolution) {
+//   numAlmost = 0;
+//   arrSolution.forEach((element, index) =>{
+//     for (let j = 0; j<arrGuess.length; j++){
+//       if (element === arrGuess[j]){
+//         arrGuess[j] = null;
+//         numAlmost++;
+//       }
+//     }
+//   });
+//   console.log('almost matches removed:');
+//   console.log(arrSolution);
+//   console.log(arrGuess);
+//   console.log('exact '+numExact);
+//   console.log('almost '+numAlmost);
+//   printBoard(arrGuess, numExact, numAlmost);
+// }
+
+// function exactMatch(arrGuess, arrSolution) {
+  
+//   // return numExact;
+// }
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
-  // generateSolution();
+  
   if (guess === solution){
     return 'You guessed it!';
   } else {
@@ -86,7 +105,7 @@ function mastermind(guess) {
     let arrGuess = guess.split('');
     console.log(arrSolution);
     console.log(arrGuess);
-    exactMatch(arrGuess, arrSolution);
+    generateHint(arrGuess, arrSolution);
   }
 }
 
