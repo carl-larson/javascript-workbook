@@ -10,9 +10,15 @@ const rl = readline.createInterface({
 let board = [];
 let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+// let numExact = 0;
+// let numAlmost = 0;
+let turns = 0;
 
-function printBoard() {
+function printBoard(arrGuess, hint) {
+  let row = [arrGuess, hint];
+  board.push(row);
   for (let i = 0; i < board.length; i++) {
+    
     console.log(board[i]);
   }
 }
@@ -28,21 +34,101 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function generateHint() {
-  // your code here
+function generateHint(arrGuess, arrSolution) {
+  let numExact = 0;
+  let numAlmost = 0;
+  let changeGuess = arrGuess;
+  changeGuess.forEach((element, index) =>{
+    if (element === arrSolution[index]) {
+      numExact++;
+      changeGuess[index] = null;
+      arrSolution[index] = null;
+    }
+  });
+  console.log('exact matches removed:');
+  console.log(arrSolution);
+  console.log(changeGuess);
+  console.log('exact ' + numExact);
+  
+  arrSolution.forEach((element, index) =>{
+    for (let j = 0; j<arrGuess.length; j++){
+      if (element === changeGuess[j]){
+        changeGuess[j] = null;
+        numAlmost++;
+      }
+    }
+
+  });
+  console.log('almost matches removed:');
+  console.log(arrSolution);
+  console.log(changeGuess);
+  console.log('exact '+numExact);
+  console.log('almost '+numAlmost);
+  let hint = `${numExact}-${numAlmost}`;
+  console.log('Hint: '+hint);
+  printBoard(arrGuess, hint);
 }
+
+
+
+// function almostMatch(arrGuess, arrSolution) {
+//   numAlmost = 0;
+//   arrSolution.forEach((element, index) =>{
+//     for (let j = 0; j<arrGuess.length; j++){
+//       if (element === arrGuess[j]){
+//         arrGuess[j] = null;
+//         numAlmost++;
+//       }
+//     }
+//   });
+//   console.log('almost matches removed:');
+//   console.log(arrSolution);
+//   console.log(arrGuess);
+//   console.log('exact '+numExact);
+//   console.log('almost '+numAlmost);
+//   printBoard(arrGuess, numExact, numAlmost);
+// }
+
+// function exactMatch(arrGuess, arrSolution) {
+  
+//   // return numExact;
+// }
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+  
+  if (guess === solution){
+    return 'You guessed it!';
+  } else {
+    let arrSolution = solution.split('');
+    let arrGuess = guess.split('');
+    console.log(arrSolution);
+    console.log(arrGuess);
+    generateHint(arrGuess, arrSolution);
+  }
 }
 
 
 function getPrompt() {
+  console.log(`Make your guess from four letters: a, b, c, d, e, f, g, h.`)
   rl.question('guess: ', (guess) => {
-    mastermind(guess);
-    printBoard();
-    getPrompt();
+    let win = mastermind(guess);
+    if (win === true) {
+      console.log("You Won!");
+      return;
+    } else {
+      turns++;
+      // printBoard();
+      if(turns < 10){
+        getPrompt();
+      } else {
+        console.log("The correct solution was:");
+        console.log(solution);
+        return;
+      }
+      
+    }
   });
 }
 
