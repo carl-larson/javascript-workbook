@@ -53,6 +53,9 @@ const listOfPlayers = []
 const blueTeam = []
 const redTeam = []
 
+// Create a new player class every time a person is moved 
+//from person list to player list:
+
 class player {
     constructor(){
 
@@ -61,20 +64,26 @@ class player {
 
     }
 }
+// THe button from the base html file creates a list of people. The list
+//items are the objects in the arrOfPeople array:
 
 const listPeopleChoices = () => {
-    const listElement = document.getElementById('people')
+    const listElement = document.getElementById('people');
     arrOfPeople.map(person => {
-        const li = document.createElement("li")
-        const button = document.createElement("button")
-        button.innerHTML = "Make Player"
-        button.addEventListener('click', function() {makePlayer(person.id)} )
-        li.appendChild(button)
-        li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
-        listElement.append(li)
-    })
+        const li = document.createElement("li");
+        const button = document.createElement("button");
+        button.innerHTML = "Make Player";
+        button.addEventListener('click', function() {makePlayer(person.id)} );
+        li.appendChild(button);
+        li.appendChild(document.createTextNode(person.name + " - " + person.skillSet));
+        listElement.append(li);
+    });
 }
 
+// From the button next to the person, calls the makePlayer() function:
+
 const makePlayer = (id) => {
-    console.log(`li ${id} was clicked!`)
+    console.log(`li ${id} was clicked!`);
+    const playerElement = document.getElementById('');
+    
 }
