@@ -84,6 +84,11 @@ const listPeopleChoices = () => {
 
 const makePlayer = (id) => {
     console.log(`li ${id} was clicked!`);
-    const playerElement = document.getElementById('');
+    const playerElement = document.getElementById('players');
+    const list = document.getElementById('people');
+    const li = list.getElementById(id);
+    list.removeChild(li);
+    
+    arrOfPeople.splice(id-2,1);
     
 }
