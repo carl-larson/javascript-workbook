@@ -73,7 +73,10 @@ const listPeopleChoices = () => {
         const li = document.createElement("li");
         const button = document.createElement("button");
         button.innerHTML = "Make Player";
-        button.addEventListener('click', function() {makePlayer(person.id)} );
+        button.addEventListener('click', function() {
+            makePlayer(person.id);
+            listElement.removeChild(li);
+        } );
         li.appendChild(button);
         li.appendChild(document.createTextNode(person.name + " - " + person.skillSet));
         listElement.append(li);
@@ -83,12 +86,12 @@ const listPeopleChoices = () => {
 // From the button next to the person, calls the makePlayer() function:
 
 const makePlayer = (id) => {
-    console.log(`li ${id} was clicked!`);
-    const playerElement = document.getElementById('players');
-    const list = document.getElementById('people');
-    const li = list.getElementById(id);
-    list.removeChild(li);
+    // console.log(`li ${id} was clicked!`);
+    // const playerElement = document.getElementById('players');
+    // const list = document.getElementById('people');
+    // const li = list.getElementById(id);
+    // list.removeChild(li);
     
-    arrOfPeople.splice(id-2,1);
+    // arrOfPeople.splice(id-2,1);
     
 }
