@@ -74,7 +74,7 @@ const listPeopleChoices = () => {
         const button = document.createElement("button");
         button.innerHTML = "Make Player";
         button.addEventListener('click', function() {
-            makePlayer(person.id);
+            makePlayer(person);
             listElement.removeChild(li);
         } );
         li.appendChild(button);
@@ -85,13 +85,45 @@ const listPeopleChoices = () => {
 
 // From the button next to the person, calls the makePlayer() function:
 
-const makePlayer = (id) => {
+function makePlayer(id) {
     // console.log(`li ${id} was clicked!`);
-    // const playerElement = document.getElementById('players');
+    console.log(id.name);
+    const playerElement = document.getElementById('players');
+    const redButton = document.createElement('button');
+    const blueButton = document.createElement('button');
+    const list = document.createElement('li');
+    const name = id.name;
+    redButton.innerHTML = 'Red Team';
+    blueButton.innerHTML = 'Blue Team';
+    redButton.addEventListener('click', function(){
+        assignTeam('red', id);
+        playerElement.removeChild(list);
+    });
+    blueButton.addEventListener('click', function(){
+        assignTeam('blue', id);
+        playerElement.removeChild(list);
+    });
+    list.appendChild(redButton);
+    list.appendChild(blueButton);
+    list.appendChild(document.createTextNode(name));
+    playerElement.append(list);
     // const list = document.getElementById('people');
     // const li = list.getElementById(id);
     // list.removeChild(li);
     
     // arrOfPeople.splice(id-2,1);
     
+}
+function assignTeam(team, id){
+    console.log(team);
+    let blueTeam = document.getElementById('blue');
+    let redTeam = document.getElementById('red');
+    const list = document.createElement('li');
+    list.appendChild(document.createTextNode(id.name));
+    if (team == 'red'){
+        redTeam.append(list);
+    } else {
+        blueTeam.append(list);
+    }
+    // playerElement.
 }
