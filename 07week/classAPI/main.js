@@ -1,6 +1,7 @@
 'use strict'
 let deckID;
-let turn1 = true;
+const assert = require('assert');
+// let turn1 = true;
 
 class Player {
     constructor (cards) {
@@ -119,3 +120,13 @@ function stopName(){
     stopName.disabled = true;
     stopButton.disabled = true;
 }
+
+// if (typeof describe === 'function') {
+
+//     describe('#towersOfHanoi()', () => {
+//         it('should be able to move a block', () => {
+//         towersOfHanoi('a', 'b');
+//         assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
+//         });
+//     });
+// }
