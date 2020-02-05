@@ -56,9 +56,13 @@ const redTeam = []
 // Create a new player class every time a person is moved 
 //from person list to player list:
 
-class player {
-    constructor(){
-
+class Player {
+    constructor(canThrow, dodge, paid, healthy, experience){
+        this.canThrowBall = canThrow;
+        this.canDodgeBall= dodge,
+        this.hasPaid= paid,
+        this.isHealthy= healthy,
+        this.yearsExperience= experience
     }
     onTeam(){
 
