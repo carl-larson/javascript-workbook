@@ -9,6 +9,35 @@ let jobTypes = {
   programmer: 'Any Ship!'
 };
 
+class Ship {
+  constructor (iName, iType, iAbility) {
+    this.name = iName;
+    this.type = iType;
+    this.ability = iAbility;
+    this.crew = [];
+  }
+  missionStatement() {
+    if (this.crew.length <1) {
+      return "Can't perform a mission yet.";
+    } else {
+      return `${this.ability}`;
+    }
+  }
+}
+
+class CrewMember {
+  constructor (iName, iJobType, iSkill) {
+    this.name = iName;
+    this.job = iJobType;
+    this.specialSkill = iSkill;
+    this.ship = null;
+  }
+  enterShip(shipName) {
+    this.ship = shipName;
+    shipName.crew.push(this);
+  }
+}
+
 // Your code here
 
 //tests
@@ -29,6 +58,7 @@ if (typeof describe === 'function'){
       assert.equal(crewMember1.ship, mav);
       assert.equal(mav.crew.length, 1);
       assert.equal(mav.crew[0], crewMember1);
+      // console.log(mav.crew[0].name);
     });
   });
 
@@ -48,12 +78,13 @@ if (typeof describe === 'function'){
       let crewMember2 = new CrewMember('Commander Lewis', 'commander', 'geology');
       assert.equal(mav.missionStatement(), "Can't perform a mission yet.");
       assert.equal(hermes.missionStatement(), "Can't perform a mission yet.");
-
+      // console.log(hermes.missionStatement());
       crewMember1.enterShip(mav);
       assert.equal(mav.missionStatement(), "Ascend into low orbit");
-
+      // console.log(mav.missionStatement());
       crewMember2.enterShip(hermes);
       assert.equal(hermes.missionStatement(), "Interplanetary Space Travel");
+      // console.log(hermes.missionStatement());
     });
   });
 }
